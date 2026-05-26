@@ -138,11 +138,21 @@ void UI::Render() {
     static bool styleInitialized = false;
     if (!styleInitialized) {
         SetupModernStyle();
+        
+        // Ensure font is built after style setup
+        ImGuiIO& io = ImGui::GetIO();
+        if (!io.Fonts->IsBuilt()) {
+            io.Fonts->Build();
+        }
+        
         styleInitialized = true;
     }
     
     ImGui::PushStyleVar(ImGuiStyleVar_Alpha, 0.96f);
     ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 1.0f);
+
+    // Debug: Always show a test window to verify rendering works
+    ImGui::ShowDemoWindow(nullptr);
 
     if (g_showMenu) {
         ImGui::SetNextWindowSize(ImVec2(580, 380), ImGuiCond_FirstUseEver);

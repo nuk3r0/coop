@@ -42,9 +42,15 @@ HRESULT WINAPI hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT Fla
 
     // Attempt recovery if previously lost
     if (g_device_lost) {
-        if (SUCCEEDED(ImGui_ImplDX12_CreateDeviceObjects())) {
-            g_device_lost = false;
-            LOG_INFO("[UI] Device recovered");
+        static int recoveryAttempts = 0;
+        if (recoveryAttempts < 3) {
+            if (SUCCEEDED(ImGui_ImplDX12_CreateDeviceObjects())) {
+                g_device_lost = false;
+                LOG_INFO("[UI] Device recovered");
+            } else {
+                recoveryAttempts++;
+                LOG_WARNING("[UI] Device recovery attempt %d failed", recoveryAttempts);
+            }
         }
         // If still lost, skip rendering this frame
         return oPresent(pSwapChain, SyncInterval, Flags);
