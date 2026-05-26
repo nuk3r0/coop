@@ -1,49 +1,44 @@
 ```
-# Build artifacts
+# Compiled and build artifacts
+*.o
 *.obj
 *.exe
 *.dll
-*.lib
-*.pdb
-*.ilk
-*.exp
-*.iobj
-*.ipdb
-*.tlog
-*.lastbuildstate
-
-# Visual Studio files
-*.vcxproj.user
-*.vcxproj.filters
-*.suo
-*.user
-*.userosscache
-*.sln.docstates
-
-# Debug and Release folders
-Debug/
-Release/
-x64/
-bin/
-obj/
+*.so
+*.a
+*.out
 
 # Dependencies
 node_modules/
-vendor/
+venv/
+.venv/
+__pycache__/
+.mypy_cache/
+.pytest_cache/
+target/
+.gradle/
 
-# Logs
+# Logs and temp files
 *.log
+*.tmp
+*.swp
+*.swo
 
 # Environment
 .env
 .env.local
-.env.*
+*.env.*
 
-# OS generated files
-.DS_Store
-Thumbs.db
+# Editors
+.vscode/
+.idea/
 
-# Temporary files
-*.tmp
-*.temp
+# Build directories
+build/
+dist/
+
+# Coverage
+coverage/
+htmlcov/
+.coverage
 ```

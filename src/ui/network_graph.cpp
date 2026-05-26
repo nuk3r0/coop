@@ -1,5 +1,5 @@
 #include "network_graph.h"
-#include "../core/logger.h"
+#include "../../utils/logger.h"
 #include <algorithm>
 #include <numeric>
 
