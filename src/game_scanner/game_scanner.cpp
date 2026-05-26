@@ -141,26 +141,29 @@ namespace GameScanner {
         for (uint32_t offset : test_offsets) {
             uintptr_t str_ptr = Memory::Read<uintptr_t>(entity_ptr + offset);
             if (str_ptr && Memory::IsReadable(str_ptr)) {
-                // Try to read first few chars
+                // Try to read first few chars using SEH
                 char buf[8] = {};
                 bool valid = true;
-                
-                // Use SEH without C++ objects in try block
                 bool exception_occurred = false;
-                __try {
-                    for (int i = 0; i < 7; i++) {
-                        char c = *reinterpret_cast<char*>(str_ptr + i);
-                        if (c >= 32 && c < 127) {
-                            buf[i] = c;
-                        } else if (c == 0) {
-                            break;
-                        } else {
-                            valid = false;
-                            break;
-                        }
+                
+                // Read characters one by one with SEH protection
+                for (int i = 0; i < 7 && !exception_occurred; i++) {
+                    char c = 0;
+                    __try {
+                        c = *reinterpret_cast<char*>(str_ptr + i);
+                    } __except(EXCEPTION_EXECUTE_HANDLER) {
+                        exception_occurred = true;
+                        break;
                     }
-                } __except(EXCEPTION_EXECUTE_HANDLER) {
-                    exception_occurred = true;
+                    
+                    if (c >= 32 && c < 127) {
+                        buf[i] = c;
+                    } else if (c == 0) {
+                        break;
+                    } else {
+                        valid = false;
+                        break;
+                    }
                 }
                 
                 if (!exception_occurred && valid && strlen(buf) >= 3) {

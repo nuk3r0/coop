@@ -27,3 +27,4 @@ private:
 #define LOG_INFO(...)  Logger::Get().Log(LogLevel::Info, __VA_ARGS__)
 #define LOG_WARNING(...) Logger::Get().Log(LogLevel::Warning, __VA_ARGS__)
 #define LOG_ERROR(...) Logger::Get().Log(LogLevel::Error, __VA_ARGS__)
+#define LOG_WARN(...) Logger::Get().Log(LogLevel::Warning, __VA_ARGS__)

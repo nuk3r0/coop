@@ -4,12 +4,8 @@
 #include <sstream>
 #include <algorithm>
 
-// ImGui forward declarations
-struct ImGuiStyle;
-namespace ImGui {
-    void StyleColorsDark();
-    ImVec4 GetColorU32(int idx);
-}
+// ImGui includes
+#include "imgui.h"
 
 namespace UI {
 
