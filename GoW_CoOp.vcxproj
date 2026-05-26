@@ -98,6 +98,8 @@
     <!-- Memory layer -->
     <ClCompile Include="src\memory\memory.cpp" />
     <ClCompile Include="src\memory\pattern_scanner.cpp" />
+    <!-- Game Scanner (auto-detection) -->
+    <ClCompile Include="src\game_scanner\game_scanner.cpp" />
     <!-- Resolver -->
     <ClCompile Include="src\resolver\resolver.cpp" />
     <!-- Entity system -->
@@ -115,6 +117,13 @@
     <ClCompile Include="src\input\input_manager.cpp" />
     <ClCompile Include="src\utils\logger.cpp" />
     <ClCompile Include="src\utils\config.cpp" />
+    <!-- Cache system -->
+    <ClCompile Include="src\cache\offset_cache.cpp" />
+    <!-- Integrity checker -->
+    <ClCompile Include="src\integrity\integrity_checker.cpp" />
+    <!-- UI enhancements -->
+    <ClCompile Include="src\ui\theme_manager.cpp" />
+    <ClCompile Include="src\ui\network_graph.cpp" />
     <!-- ImGui -->
     <ClCompile Include="vendor\imgui\imgui.cpp" />
     <ClCompile Include="vendor\imgui\imgui_demo.cpp" />
@@ -131,6 +140,8 @@
     <!-- Memory layer -->
     <ClInclude Include="src\memory\memory.h" />
     <ClInclude Include="src\memory\pattern_scanner.h" />
+    <!-- Game Scanner (auto-detection) -->
+    <ClInclude Include="src\game_scanner\game_scanner.h" />
     <!-- Resolver -->
     <ClInclude Include="src\resolver\resolver.h" />
     <!-- Entity system -->
@@ -149,6 +160,13 @@
     <ClInclude Include="src\input\input_manager.h" />
     <ClInclude Include="src\utils\logger.h" />
     <ClInclude Include="src\utils\config.h" />
+    <!-- Cache system -->
+    <ClInclude Include="src\cache\offset_cache.h" />
+    <!-- Integrity checker -->
+    <ClInclude Include="src\integrity\integrity_checker.h" />
+    <!-- UI enhancements -->
+    <ClInclude Include="src\ui\theme_manager.h" />
+    <ClInclude Include="src\ui\network_graph.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

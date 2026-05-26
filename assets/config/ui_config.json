@@ -1,0 +1,20 @@
+{
+  "theme": "dark_modern",
+  "font_path": "",
+  "scale_factor": 1.0,
+  "use_custom_font": false,
+  
+  "// Custom colors (override theme)": "",
+  "accent_primary": "#6B5CFF",
+  "bg_primary": "#0F0F14",
+  
+  "// Network settings": "",
+  "network_history_size": 100,
+  "show_latency_graph": true,
+  "show_packet_loss_graph": true,
+  
+  "// UI visibility": "",
+  "show_fps": true,
+  "show_entity_count": true,
+  "show_debug_info": false
+}
