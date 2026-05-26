@@ -1,5 +1,5 @@
 #include "integrity_checker.h"
-#include "../../utils/logger.h"
+#include "../utils/logger.h"
 #include <fstream>
 #include <sstream>
 #include <iomanip>

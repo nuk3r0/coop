@@ -1,5 +1,5 @@
 #include "theme_manager.h"
-#include "../../utils/logger.h"
+#include "../utils/logger.h"
 #include <fstream>
 #include <sstream>
 #include <algorithm>
