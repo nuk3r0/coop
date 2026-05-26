@@ -144,6 +144,9 @@ namespace GameScanner {
                 // Try to read first few chars
                 char buf[8] = {};
                 bool valid = true;
+                
+                // Use SEH without C++ objects in try block
+                bool exception_occurred = false;
                 __try {
                     for (int i = 0; i < 7; i++) {
                         char c = *reinterpret_cast<char*>(str_ptr + i);
@@ -156,13 +159,13 @@ namespace GameScanner {
                             break;
                         }
                     }
-                    
-                    if (valid && strlen(buf) >= 3) {
-                        LOG_INFO("Found name at offset 0x%X: '%s'", offset, buf);
-                        return offset;
-                    }
                 } __except(EXCEPTION_EXECUTE_HANDLER) {
-                    continue;
+                    exception_occurred = true;
+                }
+                
+                if (!exception_occurred && valid && strlen(buf) >= 3) {
+                    LOG_INFO("Found name at offset 0x%X: '%s'", offset, buf);
+                    return offset;
                 }
             }
         }
