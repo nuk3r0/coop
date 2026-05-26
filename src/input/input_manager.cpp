@@ -19,7 +19,8 @@ void InputManager::Update() {
 }
 
 bool InputManager::IsMenuTogglePressed() {
-    bool pressed = (GetAsyncKeyState(VK_F7) & 0x8000) != 0;
+    // Changed from F7 to F1 for main menu
+    bool pressed = (GetAsyncKeyState(VK_F1) & 0x8000) != 0;
     bool ret = pressed && !m_menuPrev;
     m_menuPrev = pressed;
     return ret;

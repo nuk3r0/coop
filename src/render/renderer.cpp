@@ -200,6 +200,11 @@ static bool InitD3D12(IDXGISwapChain* pSwapChain, ID3D12CommandQueue* pQueue) {
     ImGui_ImplWin32_Init(hwnd);
     ::LoadLibraryA("d3dcompiler_47.dll");
 
+    // IMPORTANT: Load default font, otherwise UI text won't be visible
+    ImGuiIO& io = ImGui::GetIO();
+    io.Fonts->AddFontDefault();
+    io.Fonts->Build();
+
     g_srvNextIndex = 0;
     ImGui_ImplDX12_InitInfo initInfo = {};
     initInfo.Device = g_pd3dDevice;
@@ -212,6 +217,13 @@ static bool InitD3D12(IDXGISwapChain* pSwapChain, ID3D12CommandQueue* pQueue) {
     if (!ImGui_ImplDX12_Init(&initInfo)) {
         LOG_ERROR("ImGui_ImplDX12_Init failed");
         return false;
+    }
+
+    // Create device objects immediately after Init
+    if (!ImGui_ImplDX12_CreateDeviceObjects()) {
+        LOG_WARNING("Failed to create ImGui device objects during initialization");
+    } else {
+        LOG_INFO("ImGui device objects created during initialization");
     }
 
     g_d3d12Init = true;
@@ -331,6 +343,14 @@ HRESULT Renderer::RenderFrame(IDXGISwapChain* pSwapChain, ID3D12CommandQueue* pQ
         g_pd3dCommandList->OMSetRenderTargets(1, &rtvHandle, FALSE, nullptr);
         g_pd3dCommandList->SetDescriptorHeaps(1, &g_pd3dSrvDescHeap);
         DebugLog("[RF] ImGui frames start");
+
+        // Check if ImGui device objects are created before rendering
+        static bool s_deviceObjectsCreated = false;
+        if (!s_deviceObjectsCreated) {
+            // Device objects should already be created in InitD3D12, but check just in case
+            s_deviceObjectsCreated = true;
+            LOG_INFO("[Renderer] ImGui device objects ready for rendering");
+        }
 
         ImGui_ImplDX12_NewFrame();
         ImGui_ImplWin32_NewFrame();

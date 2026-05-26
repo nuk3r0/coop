@@ -7,32 +7,23 @@
 *.so
 *.a
 *.out
+build/
+dist/
 
 # Dependencies
+node_modules/
 venv/
 .venv/
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
-env/
-env.bak/
-venv.bak/
-
-# Build directories
-build/
-dist/
-*.egg-info/
-.tox/
-.coverage
-htmlcov/
+.mypy_cache/
+.pytest_cache/
+target/
+.gradle/
 
 # Logs and temp files
 *.log
 *.tmp
 *.swp
-*.swo
 
 # Environment
 .env
@@ -42,10 +33,8 @@ htmlcov/
 # Editors
 .vscode/
 .idea/
-*.swp
-*.swo
 
-# OS generated files
+# System files
 .DS_Store
 Thumbs.db
 ```
