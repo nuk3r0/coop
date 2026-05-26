@@ -161,7 +161,7 @@ void UI::Render() {
     static bool s_always_open = true;
     ImGui::SetNextWindowPos(ImVec2(50, 50), ImGuiCond_FirstUseEver);
     ImGui::SetNextWindowSize(ImVec2(450, 300), ImGuiCond_FirstUseEver);
-    ImGui::Begin("###GoWCoOpDebug", &s_always_open, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoClose);
+    ImGui::Begin("###GoWCoOpDebug", &s_always_open, ImGuiWindowFlags_NoCollapse);
     ImGui::Text("GoW Co-Op v3 - UI Test Window");
     ImGui::Separator();
     ImGui::Text("If you see this, UI rendering is WORKING!");
