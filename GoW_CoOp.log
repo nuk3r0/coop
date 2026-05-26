@@ -1,0 +1,14 @@
+[23:13:52][INF] GoW Co-Op Mod v3 — Simple Co-op
+[23:13:52][INF] [GameState] Module base: 0x7FF723F10000
+[23:13:52][INF] [GameState] Entity system initialized
+[23:13:52][INF] NetworkManager initialized
+[23:13:52][INF] [Main] Core subsystems ready
+[23:13:52][INF] Renderer context created
+[23:13:52][INF] CreateCommandQueue hooked @ 00007FFEB3D8D620
+[23:13:52][INF] Captured ID3D12CommandQueue @ 000002938745D680 (Type=DIRECT)
+[23:13:52][INF] Present found @ 00007FFEB50D5EA0
+[23:13:52][INF] Hooks installed
+[23:13:52][INF] [Main] UI initialized
+[23:13:52][INF] D3D12 init: format=24, bufferCount=3
+[23:13:52][INF] Using HWND=00000000000A092C for ImGui
+[23:13:52][INF] D3D12 backend initialized
