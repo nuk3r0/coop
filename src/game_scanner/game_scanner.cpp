@@ -143,6 +143,7 @@ namespace GameScanner {
             if (str_ptr && Memory::IsReadable(str_ptr)) {
                 // Try to read first few chars
                 char buf[8] = {};
+                bool valid = true;
                 __try {
                     for (int i = 0; i < 7; i++) {
                         char c = *reinterpret_cast<char*>(str_ptr + i);
@@ -151,11 +152,12 @@ namespace GameScanner {
                         } else if (c == 0) {
                             break;
                         } else {
+                            valid = false;
                             break;
                         }
                     }
                     
-                    if (strlen(buf) >= 3) {
+                    if (valid && strlen(buf) >= 3) {
                         LOG_INFO("Found name at offset 0x%X: '%s'", offset, buf);
                         return offset;
                     }

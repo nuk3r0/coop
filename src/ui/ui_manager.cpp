@@ -119,6 +119,13 @@ static void DrawStatusBadge(const char* label, ImVec4 color) {
     ImGui::PopStyleColor();
 }
 
+// Overload with format support
+static void DrawStatusBadge(const char* format, ImVec4 color, float value) {
+    ImGui::PushStyleColor(ImGuiCol_Text, color);
+    ImGui::Text(format, value);
+    ImGui::PopStyleColor();
+}
+
 // Helper to format bytes nicely
 static void DrawDataField(const char* label, const char* value, bool dim = false) {
     ImGui::TextColored(dim ? ImVec4(0.5f, 0.5f, 0.55f, 1.0f) : ImVec4(0.92f, 0.92f, 0.95f, 1.0f), "%s", label);
