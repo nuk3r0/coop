@@ -141,20 +141,12 @@ namespace GameScanner {
         for (uint32_t offset : test_offsets) {
             uintptr_t str_ptr = Memory::Read<uintptr_t>(entity_ptr + offset);
             if (str_ptr && Memory::IsReadable(str_ptr)) {
-                // Try to read first few chars using SEH
+                // Read string safely without SEH
                 char buf[8] = {};
                 bool valid = true;
-                bool exception_occurred = false;
                 
-                // Read characters one by one with SEH protection
-                for (int i = 0; i < 7 && !exception_occurred; i++) {
-                    char c = 0;
-                    __try {
-                        c = *reinterpret_cast<char*>(str_ptr + i);
-                    } __except(EXCEPTION_EXECUTE_HANDLER) {
-                        exception_occurred = true;
-                        break;
-                    }
+                for (int i = 0; i < 7; i++) {
+                    char c = Memory::Read<char>(str_ptr + i);
                     
                     if (c >= 32 && c < 127) {
                         buf[i] = c;
@@ -166,7 +158,7 @@ namespace GameScanner {
                     }
                 }
                 
-                if (!exception_occurred && valid && strlen(buf) >= 3) {
+                if (valid && strlen(buf) >= 3) {
                     LOG_INFO("Found name at offset 0x%X: '%s'", offset, buf);
                     return offset;
                 }
