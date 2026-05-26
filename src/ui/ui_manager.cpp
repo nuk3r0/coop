@@ -145,14 +145,30 @@ void UI::Render() {
             io.Fonts->Build();
         }
         
+        // FORCE ENABLE MAIN MENU AND DEMO WINDOW ON FIRST RENDER
+        g_showMenu = true;
+        g_showNet = false;
+        
         styleInitialized = true;
+        LOG_INFO("[UI] First render - enabling main menu");
     }
     
     ImGui::PushStyleVar(ImGuiStyleVar_Alpha, 0.96f);
     ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 1.0f);
 
     // Debug: Always show a test window to verify rendering works
-    ImGui::ShowDemoWindow(nullptr);
+    // This window CANNOT be closed and will always be visible if UI is working
+    static bool s_always_open = true;
+    ImGui::SetNextWindowPos(ImVec2(50, 50), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowSize(ImVec2(450, 300), ImGuiCond_FirstUseEver);
+    ImGui::Begin("###GoWCoOpDebug", &s_always_open, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoClose);
+    ImGui::Text("GoW Co-Op v3 - UI Test Window");
+    ImGui::Separator();
+    ImGui::Text("If you see this, UI rendering is WORKING!");
+    ImGui::Text("Press F1 to toggle main menu");
+    ImGui::Text("Press F8 to toggle network window");
+    ImGui::Text("FPS: %.1f", ImGui::GetIO().Framerate);
+    ImGui::End();
 
     if (g_showMenu) {
         ImGui::SetNextWindowSize(ImVec2(580, 380), ImGuiCond_FirstUseEver);
